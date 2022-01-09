@@ -80,7 +80,7 @@ def admin_only(f):
 @app.route('/')
 def get_all_posts():
     posts = BlogPost.query.all()
-    return render_template("index.html", all_posts=posts, current_user=current_user)
+    return render_template("index.html", all_posts=posts, current_user=current_user, date=date.today().strftime("%Y"))
 
 
 @app.route('/register', methods=["GET", "POST"])
@@ -109,7 +109,7 @@ def register():
         login_user(new_user)
         return redirect(url_for("get_all_posts"))
 
-    return render_template("register.html", form=form, current_user=current_user)
+    return render_template("register.html", form=form, current_user=current_user, date=date.today().strftime("%Y"))
 
 
 @app.route('/login', methods=["GET", "POST"])
@@ -130,7 +130,7 @@ def login():
         else:
             login_user(user)
             return redirect(url_for('get_all_posts'))
-    return render_template("login.html", form=form, current_user=current_user)
+    return render_template("login.html", form=form, current_user=current_user, date=date.today().strftime("%Y"))
 
 
 @app.route('/logout')
@@ -157,12 +157,12 @@ def show_post(post_id):
         db.session.add(new_comment)
         db.session.commit()
 
-    return render_template("post.html", post=requested_post, form=form, current_user=current_user)
+    return render_template("post.html", post=requested_post, form=form, current_user=current_user, date=date.today().strftime("%Y"))
 
 
 @app.route("/about")
 def about():
-    return render_template("about.html", current_user=current_user)
+    return render_template("about.html", current_user=current_user, date=date.today().strftime("%Y"))
 
 
 @app.route("/contact", methods=["POST", "GET"])
@@ -181,11 +181,11 @@ def contact():
                                     msg=f"Subject:Blog Üzenet\n\nNév: {name}\nE-mail cím: {email}\n"
                                         f"Telefonszám: {phone}\nÜzenet: {message}".encode("utf-8"))
                 connection.quit()
-            return render_template("contact.html", request=True, current_user=current_user)
+            return render_template("contact.html", request=True, current_user=current_user, date=date.today().strftime("%Y"))
         else:
-            return render_template("contact.html", request=None, current_user=current_user)
+            return render_template("contact.html", request=None, current_user=current_user, date=date.today().strftime("%Y"))
     else:
-        return render_template("contact.html", request=False, current_user=current_user)
+        return render_template("contact.html", request=False, current_user=current_user, date=date.today().strftime("%Y"))
 
 
 @app.route("/new-post", methods=["GET", "POST"])
@@ -229,7 +229,7 @@ def edit_post(post_id):
         db.session.commit()
         return redirect(url_for("show_post", post_id=post.id))
 
-    return render_template("make-post.html", form=edit_form, is_edit=True, current_user=current_user)
+    return render_template("make-post.html", form=edit_form, is_edit=True, current_user=current_user, date=date.today().strftime("%Y"))
 
 
 @app.route("/delete/<int:post_id>")
