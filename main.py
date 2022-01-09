@@ -12,7 +12,6 @@ from flask_gravatar import Gravatar
 import smtplib
 
 YEAR = '{dt.year}'.format(dt=datetime.now())
-
 my_email = "janosgall927@gmail.com"
 my_password = "Naruto2006"
 app = Flask(__name__)
