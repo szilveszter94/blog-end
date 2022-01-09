@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for, flash, abort
+from flask import Flask, render_template, redirect, url_for, flash, abort, request
 from flask_bootstrap import Bootstrap
 from flask_ckeditor import CKEditor
 from datetime import date
@@ -9,7 +9,10 @@ from sqlalchemy.orm import relationship
 from flask_login import UserMixin, login_user, LoginManager, login_required, current_user, logout_user
 from forms import LoginForm, RegisterForm, CreatePostForm, CommentForm
 from flask_gravatar import Gravatar
+import smtplib
 
+my_email = "janosgall927@gmail.com"
+my_password = "Naruto2006"
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '8BYkEfBA6O6donzWlSihBXox7C0sKR6b'
 ckeditor = CKEditor(app)
@@ -161,9 +164,27 @@ def about():
     return render_template("about.html", current_user=current_user)
 
 
-@app.route("/contact")
+@app.route("/contact", methods=["POST", "GET"])
 def contact():
-    return render_template("contact.html", current_user=current_user)
+    if request.method == "POST":
+        name = request.form.get("name")
+        email = request.form.get("email")
+        phone = request.form.get("phone")
+        message = request.form.get("message")
+        if len(name) > 0 and len(email) > 0 and len(phone) > 0 and len(message) > 0:
+            with smtplib.SMTP("smtp.gmail.com", 587) as connection:
+                connection.starttls()
+                connection.login(user=my_email, password=my_password)
+                connection.sendmail(from_addr=my_email,
+                                    to_addrs="s.szilveszter1994@gmail.com",
+                                    msg=f"Subject:Blog Üzenet\n\nNév: {name}\nE-mail cím: {email}\n"
+                                        f"Telefonszám: {phone}\nÜzenet: {message}".encode("utf-8"))
+                connection.quit()
+            return render_template("contact.html", request=True, current_user=current_user)
+        else:
+            return render_template("contact.html", request=None, current_user=current_user)
+    else:
+        return render_template("contact.html", request=False, current_user=current_user)
 
 
 @app.route("/new-post", methods=["GET", "POST"])
