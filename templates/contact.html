@@ -7,7 +7,13 @@
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="page-heading">
-            <h1>Contact Me</h1>
+            {% if request == True %}
+            <h1>Successfully sent your message</h1>
+            {% elif request == None %}
+            <h1>E-mail error: please fill in all fields!</h1>
+          {% else %}
+          <h1>Contact Me</h1>
+            {% endif %}
             <span class="subheading">Have questions? I have answers.</span>
           </div>
         </div>
@@ -55,7 +61,11 @@
           </div>
           <br>
           <div id="success"></div>
+          {% if request == True %}
+            <h1>Successfully sent your message</h1>
+          {% elif request == False %}
           <button type="submit" class="btn btn-primary" id="sendMessageButton">Send</button>
+            {% endif %}
         </form>
       </div>
     </div>
