@@ -1,14 +1,14 @@
 {% include "header.html" %}
 
   <!-- Page Header -->
-  <header class="masthead" style="background-image: url('{{ url_for('static', filename='img/contact-bg.jpg')}}')">
+  <header class="masthead" style="background-image: url('https://images.unsplash.com/photo-1466096115517-bceecbfb6fde?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80')">
     <div class="overlay"></div>
     <div class="container">
       <div class="row">
         <div class="col-lg-8 col-md-10 mx-auto">
           <div class="page-heading">
             {% if request == True %}
-            <h1>Sikeresen elküldted az üzenetet</h1>
+            <h1>Sikeresen elküldted az üzenetet.</h1>
             {% elif request == None %}
             <h1>E-mail hiba: kérlek töltsd ki helyesen az összes mezőt!</h1>
           {% else %}
@@ -62,7 +62,7 @@
           <br>
           <div id="success"></div>
           {% if request == True %}
-            <h1>Sikeresen elküldted az üzenetet</h1>
+            <h1>Sikeresen elküldted az üzenetet.</h1>
           {% elif request == False %}
           <button type="submit" class="btn btn-primary" id="sendMessageButton">Küldés</button>
             {% endif %}
