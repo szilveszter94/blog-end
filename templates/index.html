@@ -29,9 +29,8 @@
               {{post.subtitle}}
             </h3>
           </a>
-          <p class="post-meta">Posted by
-            {{post.author.name}}
-            on {{post.date}}
+          <p class="post-meta">
+            {{post.author.name}} által lértehozva, {{post.date}}
             {% if current_user.id == 1: %}
             <a href="{{url_for('delete_post', post_id=post.id) }}">✘</a>
             {% endif %}
