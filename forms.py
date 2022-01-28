@@ -6,26 +6,26 @@ from flask_ckeditor import CKEditorField
 
 ##WTForm
 class CreatePostForm(FlaskForm):
-    title = StringField("Blog Post Title", validators=[DataRequired()])
-    subtitle = StringField("Subtitle", validators=[DataRequired()])
-    img_url = StringField("Blog Image URL", validators=[DataRequired(), URL()])
-    body = CKEditorField("Blog Content", validators=[DataRequired()])
-    submit = SubmitField("Submit Post")
+    title = StringField("Bejegyzés címe", validators=[DataRequired()])
+    subtitle = StringField("Alcím", validators=[DataRequired()])
+    img_url = StringField("Háttérkép URL", validators=[DataRequired(), URL()])
+    body = CKEditorField("Bejegyzés tartalma", validators=[DataRequired()])
+    submit = SubmitField("Közzététel")
 
 
 class RegisterForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired()])
-    password = PasswordField("Password", validators=[DataRequired()])
-    name = StringField("Name", validators=[DataRequired()])
-    submit = SubmitField("Sign Me Up!")
+    password = PasswordField("Jelszó", validators=[DataRequired()])
+    name = StringField("Név", validators=[DataRequired()])
+    submit = SubmitField("Regisztrálás!")
 
 
 class LoginForm(FlaskForm):
     email = StringField("Email", validators=[DataRequired()])
-    password = PasswordField("Password", validators=[DataRequired()])
-    submit = SubmitField("Let Me In!")
+    password = PasswordField("Jelszó", validators=[DataRequired()])
+    submit = SubmitField("Bejelentkezés!")
 
 
 class CommentForm(FlaskForm):
-    comment_text = CKEditorField("Comment", validators=[DataRequired()])
-    submit = SubmitField("Submit Comment")
+    comment_text = CKEditorField("Hozzászólás", validators=[DataRequired()])
+    submit = SubmitField("Küldés")
