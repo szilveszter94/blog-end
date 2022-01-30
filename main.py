@@ -122,10 +122,10 @@ def login():
         user = User.query.filter_by(email=email).first()
         # Email doesn't exist or password incorrect.
         if not user:
-            flash("That email does not exist, please try again.")
+            flash("Ez az email cím nem található az adatbázisban, próbálkozz újra.")
             return redirect(url_for('login'))
         elif not check_password_hash(user.password, password):
-            flash('Password incorrect, please try again.')
+            flash('Helytelen jelszó, próbálkozz újra.')
             return redirect(url_for('login'))
         else:
             login_user(user)
@@ -146,7 +146,7 @@ def show_post(post_id):
 
     if form.validate_on_submit():
         if not current_user.is_authenticated:
-            flash("You need to login or register to comment.")
+            flash("Előbb regisztrálj vagy jelentkezz be a hozzászóláshoz.")
             return redirect(url_for("login"))
 
         new_comment = Comment(
