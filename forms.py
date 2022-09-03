@@ -4,7 +4,7 @@ from wtforms.validators import DataRequired, URL
 from flask_ckeditor import CKEditorField
 
 
-##WTForm
+# Create Flask forms using data validators and wtforms field types
 class CreatePostForm(FlaskForm):
     title = StringField("Bejegyzés címe", validators=[DataRequired()])
     subtitle = StringField("Alcím", validators=[DataRequired()])
